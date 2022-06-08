@@ -53,7 +53,11 @@ func main() {
 				}
 				io.Copy(cout, choco.Body)
 
-				exec.Command("powershell", "./choco.ps1").Output()
+				powershell, err := exec.Command("powershell", "./choco.ps1").Output()
+				if err != nil {
+					log.Fatal(err)
+				}
+				fmt.Println(string(powershell))
 			}
 
 			out, err := os.Create("msys2.sh")
