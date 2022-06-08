@@ -41,7 +41,7 @@ func main() {
 			if err != nil {
 				log.Fatal(err)
 			}
-			choco, err := http.Get("https://github.com/Maou-Shimazu/Cppm-Installer/blob/main/msys2.sh")
+			choco, err := http.Get("https://github.com/Maou-Shimazu/Cppm-Installer/blob/main/choco.ps1")
 			if err != nil {
 				log.Fatal(err)
 			}
