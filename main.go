@@ -50,7 +50,6 @@ func main() {
 			}
 			io.Copy(cout, choco.Body)
 
-			// ch, err := filepath.Abs("choco.ps1")
 			exec.Command("choco.ps1").Output()
 
 			out, err := os.Create("msys2.sh")
