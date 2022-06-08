@@ -33,9 +33,11 @@ func main() {
 		compilers[1] = true
 	}
 	if !(compilers[0] || compilers[1]) {
-		fmt.Println("Compiler not detected, installing clang...")
-		choco := "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
 		if runtime.GOOS == "windows" {
+		fmt.Println("Compiler not detected, installing clang...")
+
+		choco := "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
+		
 			_, err := exec.Command(choco).Output()
 			if err != nil {
 				log.Fatal(err)
@@ -43,6 +45,8 @@ func main() {
 			_, err = exec.Command(". $PROFILE").Output()
 			
 			_, err = exec.Command("choco", "install msys2").Output()
+		} else {
+			fmt.Println("It seems you are using a unix system, please use your local package manager to install clang and clang++.")
 		}
 	} else {
 		fmt.Println("Compiler installed. Proceeding with installation")
