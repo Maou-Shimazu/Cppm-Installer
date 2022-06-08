@@ -39,7 +39,7 @@ func main() {
 
 			choco := "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
 		
-			_, err := exec.Command(choco).Output()
+			_, err := exec.Command("powershell", choco).Output()
 			if err != nil {
 				log.Fatal(err)
 			}
