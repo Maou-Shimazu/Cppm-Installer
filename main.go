@@ -94,6 +94,7 @@ func main() {
 	//user_os :=
 	switch runtime.GOOS {
 	case "windows":
+		//note: put cppm/cppm.exe in $HOME/.cppm/bin
 		out, err := os.Create("cppm.exe")
 		if err != nil {
 			log.Fatal(err)
