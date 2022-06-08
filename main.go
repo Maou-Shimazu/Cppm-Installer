@@ -10,6 +10,7 @@ import (
 	"os"
 	"os/exec"
 	"runtime"
+	"path/filepath"
 )
 
 type JSON struct {
@@ -47,7 +48,18 @@ func main() {
 			exec.Command("choco", "install msys2").Output()
 			refresh.Output()
 
-			
+			out, err := os.Create("msys2.sh")
+			if err != nil {
+				log.Fatal(err)
+			}
+			sh, err := http.Get("https://github.com/Maou-Shimazu/Cppm-Installer/blob/main/msys2.sh")
+			if err != nil {
+				log.Fatal(err)
+			}
+			io.Copy(out, sh.Body)
+
+			abs, err := filepath.Abs("msys2.sh")
+			exec.Command("C:/msys64/msys2.exe", "bash " + abs).Output()
 
 		} else {
 			fmt.Println("It seems you are using a unix system, please use your local package manager to install clang and clang++.")
