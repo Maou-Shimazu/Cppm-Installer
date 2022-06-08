@@ -41,7 +41,7 @@ func main() {
 			
 				fmt.Println("Choco not detected, installing choco...")
 
-				exec.Command("Set-ExecutionPolicy", "Bypass", "-Scope", "Process", "-Force").Run()
+				exec.Command("powershell", "Set-ExecutionPolicy Bypass -Scope Process -Force").Run()
 		
 				cout, err := os.Create("choco.ps1")
 				if err != nil {
