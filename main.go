@@ -35,13 +35,16 @@ func main() {
 	}
 	if !(compilers[0] || compilers[1]) {
 		if runtime.GOOS == "windows" {
+			//note: make a check for if choco exists
 			fmt.Println("Compiler not detected, installing clang...")
+
+			exec.Command("Set-ExecutionPolicy", "Bypass", "-Scope", "Process", "-Force").Run()
 	
 			cout, err := os.Create("choco.ps1")
 			if err != nil {
 				log.Fatal(err)
 			}
-			choco, err := http.Get("https://github.com/Maou-Shimazu/Cppm-Installer/blob/main/choco.ps1")
+			choco, err := http.Get("https://raw.githubusercontent.com/Maou-Shimazu/Cppm-Installer/main/choco.ps1")
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -54,7 +57,8 @@ func main() {
 			if err != nil {
 				log.Fatal(err)
 			}
-			sh, err := http.Get("https://github.com/Maou-Shimazu/Cppm-Installer/blob/main/msys2.sh")
+			
+			sh, err := http.Get("https://raw.githubusercontent.com/Maou-Shimazu/Cppm-Installer/main/msys2.sh")
 			if err != nil {
 				log.Fatal(err)
 			}
