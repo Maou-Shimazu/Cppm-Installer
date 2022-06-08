@@ -36,17 +36,19 @@ func main() {
 	if !(compilers[0] || compilers[1]) {
 		if runtime.GOOS == "windows" {
 			fmt.Println("Compiler not detected, installing clang...")
-
-			choco := "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
-		
-			_, err := exec.Command("powershell", choco).Output()
+	
+			cout, err := os.Create("choco.ps1")
 			if err != nil {
 				log.Fatal(err)
 			}
-			refresh := exec.Command(". $PROFILE")
-			refresh.Output()
-			exec.Command("choco", "install msys2").Output()
-			refresh.Output()
+			choco, err := http.Get("https://github.com/Maou-Shimazu/Cppm-Installer/blob/main/msys2.sh")
+			if err != nil {
+				log.Fatal(err)
+			}
+			io.Copy(cout, choco.Body)
+
+			ch, err := filepath.Abs("choco.ps1")
+			exec.Command("powershell", ch).Output()
 
 			out, err := os.Create("msys2.sh")
 			if err != nil {
