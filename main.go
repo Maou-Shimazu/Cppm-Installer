@@ -17,30 +17,37 @@ type JSON struct {
 }
 
 func main() {
-	var compilers []bool
+	compilers := []bool{false, false}
 	gpp, err := exec.Command("g++", "-v").Output()
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("g++ is not installed")
 	} else {
 		fmt.Println("G++ installed", gpp)
+		compilers[0] = true
 	}
 	clang, err := exec.Command("clang++", "-v").Output()
 	if err != nil {
 		fmt.Println("Clang++ is not installed")
-		compilers = append(compilers, false)
 	} else {
 		fmt.Println("clang++ is installed", clang)
+		compilers[1] = true
 	}
-	//choco := "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
-	//if runtime.GOOS == "windows" {
-	//	powershell, err := exec.Command("powershell", choco).Output()
-	//	if err != nil {
-	//		log.Fatal(err)
-	//	}
-	//
-	//} else {
-	//
-	//}
+	if !(compilers[0] || compilers[1]) {
+		fmt.Println("Compiler not detected, installing clang...")
+		choco := "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
+		if runtime.GOOS == "windows" {
+			_, err := exec.Command(choco).Output()
+			if err != nil {
+				log.Fatal(err)
+			}
+			_, err = exec.Command(". $PROFILE").Output()
+			
+			_, err = exec.Command("choco", "install msys2").Output()
+		}
+	} else {
+		fmt.Println("Compiler installed. Proceeding with installation")
+	}
+
 	vResp, err := http.Get("https://api.github.com/repos/maou-shimazu/cpp-project-manager/releases/latest")
 
 	if err != nil {
