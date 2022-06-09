@@ -7,10 +7,12 @@ choco install msys2
 . $PROFILE
 
 $cppm = "$HOME/.cppm/bin"
-mkdir $cppm
-
-$p = [Environment]::GetEnvironmentVariable("PATH", [EnvironmentVariableTarget]::Machine);
-[Environment]::SetEnvironmentVariable("PATH", $p + ";" + $cppm, [EnvironmentVariableTarget]::Machine);
+if (!(Test-Path -Path $cppm)) { # if cppm path dosent exist
+    mkdir $cppm
+    
+    $p = [Environment]::GetEnvironmentVariable("PATH", [EnvironmentVariableTarget]::Machine);
+    [Environment]::SetEnvironmentVariable("PATH", $p + ";" + $cppm, [EnvironmentVariableTarget]::Machine);
+}
 
 . $PROFILE
 

@@ -2,13 +2,16 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	// "fmt"
 	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+	// "os/user"
 	"runtime"
+	// "path/filepath"
 )
 
 type JSON struct {
@@ -37,18 +40,23 @@ func main() {
 	//user_os :=
 	switch runtime.GOOS {
 	case "windows":
-		//note: put cppm/cppm.exe in $HOME/.cppm/bin
-		out, err := os.Create("cppm.exe")
+
+		home, _ := os.UserHomeDir()
+		out, err := os.Create(home + "/.cppm/bin/cppm.exe")
 		if err != nil {
+			fmt.Println("failed to create file")
 			log.Fatal(err)
 		}
+		fmt.Println("Created cppm")
+		defer out.Close()
 		resp, err := http.Get("https://github.com/Maou-Shimazu/Cpp-Project-Manager/releases/download/" + version + "/cppm-win-x64.exe")
 		if err != nil {
 			log.Fatal(err)
 		}
 		io.Copy(out, resp.Body)
 	case "linux":
-		out, err := os.Create("cppm")
+		home, _ := os.UserHomeDir()
+		out, err := os.Create(home + "/.cppm/bin/cppm")
 		if err != nil {
 			log.Fatal(err)
 		}
