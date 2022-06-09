@@ -11,3 +11,7 @@ mkdir $cppm
 
 $p = [Environment]::GetEnvironmentVariable("PATH", [EnvironmentVariableTarget]::Machine);
 [Environment]::SetEnvironmentVariable("PATH", $p + ";" + $cppm, [EnvironmentVariableTarget]::Machine);
+
+. $PROFILE
+
+C:/msys64/msys2.exe bash msys2.sh

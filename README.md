@@ -2,7 +2,9 @@
 
 Installer for the C++ Project Manager
 
-## Install
+## Installing Msys2 along with the installer
+First to install msys2, install from the [release]() page and extract the folder. 
+There is a `choco.ps1` file in the extracted folder. right click it and click `Run with Powershell`.
 
 ```
 go install github.com/Cppm-Installer
