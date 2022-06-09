@@ -3,14 +3,12 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 choco install msys2
 
 $cppm = "$HOME\.cppm\bin"
+$msys2 = "C:\tools\msys64\mingw64\bin"
 if (!(Test-Path -Path $cppm)) { # if cppm path dosent exist
     mkdir $cppm
     
     $p = [Environment]::GetEnvironmentVariable("PATH", [EnvironmentVariableTarget]::Machine);
-    [Environment]::SetEnvironmentVariable("PATH", $p + ";" + $cppm, [EnvironmentVariableTarget]::Machine);
+    [Environment]::SetEnvironmentVariable("PATH", $p + ";" + $cppm + ";" + $msys2, [EnvironmentVariableTarget]::Machine);
 }
 
 C:\tools\msys64\msys2.exe bash msys2.sh
-
-$msys2 = "C:\tools\msys64\mingw64\bin"
-[Environment]::SetEnvironmentVariable("PATH", $p + ";" + $msys2, [EnvironmentVariableTarget]::Machine);
