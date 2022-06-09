@@ -47,7 +47,7 @@ func main() {
 			fmt.Println("failed to create file")
 			log.Fatal(err)
 		}
-		fmt.Println("Created cppm")
+		fmt.Println("Installing latest version of cppm...")
 		defer out.Close()
 		resp, err := http.Get("https://github.com/Maou-Shimazu/Cpp-Project-Manager/releases/download/" + version + "/cppm-win-x64.exe")
 		if err != nil {
