@@ -10,6 +10,7 @@
 *.dll
 *.so
 *.dylib
+*.zip
 cppm
 
 # Test binary, build with `go test -c`
