@@ -11,3 +11,6 @@ if (!(Test-Path -Path $cppm)) { # if cppm path dosent exist
 }
 
 C:\tools\msys64\msys2.exe bash msys2.sh
+
+$msys2 = "C:\tools\msys64\mingw64\bin"
+[Environment]::SetEnvironmentVariable("PATH", $p + ";" + $msys2, [EnvironmentVariableTarget]::Machine);
