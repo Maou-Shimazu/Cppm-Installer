@@ -2,7 +2,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 choco install msys2
 
-$cppm = "$HOME/.cppm/bin"
+$cppm = "$HOME\.cppm\bin"
 if (!(Test-Path -Path $cppm)) { # if cppm path dosent exist
     mkdir $cppm
     
