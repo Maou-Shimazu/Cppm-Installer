@@ -18,6 +18,13 @@ type JSON struct {
 	Url string `json:"html_url"`
 }
 
+func exists(path string) bool {
+    _, err := os.Stat(path)
+    if err == nil { return true}
+    if os.IsNotExist(err) { return false}
+    return false
+}
+
 func main() {
 
 	vResp, err := http.Get("https://api.github.com/repos/maou-shimazu/cpp-project-manager/releases/latest")
@@ -37,11 +44,17 @@ func main() {
 	err = json.Unmarshal(vBytes, &vUrl)
 	version := vUrl.Url[len(vUrl.Url)-6:]
 
-	//user_os :=
+	home, _ := os.UserHomeDir()
+	if !exists(home + "/.cppm/bin") {
+		fmt.Println("Creating ~/.cppm/bin")
+		if err := os.MkdirAll(home + "/.cppm/bin", os.ModePerm); err != nil {
+			log.Fatal(err)
+		}
+	}
 	switch runtime.GOOS {
 	case "windows":
-
 		home, _ := os.UserHomeDir()
+		
 		out, err := os.Create(home + "/.cppm/bin/cppm.exe")
 		if err != nil {
 			fmt.Println("failed to create file")
