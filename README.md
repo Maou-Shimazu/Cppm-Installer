@@ -13,6 +13,10 @@ It will take a few minutes for everything to finish installing, if you get any p
 `.\Cppm-Installer.exe` This installs the latest version of cppm and configures cppm paths. \
 There will be better user messages in the future, you can always run the installer again to update. 
 
+Note: \
+When you install cppm, if there are no commands working, it is possible that you lack Visual C++ Redistributable Packages. \
+You can install them from [here](https://www.microsoft.com/en-gb/download/details.aspx?id=48145), if you dont think that is the problem, run cppm by double clicking, it is located in the "C:\User\\[username]\\.cppm\bin" folder.
+
 # LICENSE
 
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg)](http://www.opensource.org/licenses/MIT)
