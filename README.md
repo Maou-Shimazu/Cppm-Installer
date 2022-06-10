@@ -1,6 +1,6 @@
 # Cppm-Installer
 
-Installer for the C++ Project Manager
+Installer for the [C++ Project Manager](https://github.com/maou-shimazu/cpp-project-manager)
 
 ## Installing Msys2 along with the installer
 ##### This only applies if you do not have c++ installed via clang++/g++ [windows only]
