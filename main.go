@@ -15,7 +15,7 @@ import (
 )
 
 type JSON struct {
-	Url string `json:"html_url"`
+	Tag string `json:"tag_name"`
 }
 
 func exists(path string) bool {
@@ -42,7 +42,7 @@ func main() {
 
 	var vUrl JSON
 	err = json.Unmarshal(vBytes, &vUrl)
-	version := vUrl.Url[len(vUrl.Url)-6:]
+	version := vUrl.Tag[1:len(version)-1]
 
 	home, _ := os.UserHomeDir()
 	if !exists(home + "/.cppm/bin") {
