@@ -1,3 +1,3 @@
-module github.com/Maou-Shimazu/Cppm-Installer
+module github.com/Maou-Shimazu/cppm-Installer
 
 go 1.18
