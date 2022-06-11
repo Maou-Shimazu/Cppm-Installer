@@ -39,7 +39,7 @@ func main() {
 
 	var vUrl JSON
 	err = json.Unmarshal(vBytes, &vUrl)
-	version := vUrl.Tag[1:len(version)-1]
+	version := vUrl.Tag
 
 	home, _ := os.UserHomeDir()
 	if !exists(home + "/.cppm/bin") {
