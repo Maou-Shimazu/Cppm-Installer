@@ -3,15 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	// "fmt"
 	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-	// "os/user"
 	"runtime"
-	// "path/filepath"
 )
 
 type JSON struct {
